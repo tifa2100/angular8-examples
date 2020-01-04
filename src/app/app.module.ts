@@ -8,11 +8,13 @@ import { MatRadioModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialTbComponent } from './datatables/material-tb/material-tb.component';
+import { MatTbRadiobtnComponent } from './datatables/mat-tb-radiobtn/mat-tb-radiobtn.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MaterialTbComponent
+    MaterialTbComponent,
+    MatTbRadiobtnComponent,
   ],
   imports: [
     BrowserModule,
