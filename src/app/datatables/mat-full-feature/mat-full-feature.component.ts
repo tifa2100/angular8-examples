@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { MatTableDataSource } from '@angular/material';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
+
 
 @Component({
   selector: 'app-mat-full-feature',
@@ -8,14 +10,25 @@ import { MatTableDataSource } from '@angular/material';
   styleUrls: ['./mat-full-feature.component.css']
 })
 export class MatFullFeatureComponent implements OnInit {
-  public displayedColumns = ['name', 'position', 'weight', 'details', 'update', 'delete'
-];
+  public displayedColumns = ['name', 'position', 'weight', 'details', 'update', 'delete'];
   public dataSource = new MatTableDataSource<Element>();
+
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor() { }
 
   ngOnInit() {
     this.getAllOwners();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  public doFilter = (value: string) => {
+    this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 
   public getAllOwners() {
